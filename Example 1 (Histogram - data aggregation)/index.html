@@ -45,22 +45,26 @@
 
         let rndNormal= d3.randomNormal(mu,sigma)
         // Sample data (1000 points)
-        let sample = d3.range(1000).map(d=>rndNormal())
+        let sample = d3.range(1000).map(d=>rndNormal())  // map is basically a for loop which accesses each row in the loop
         //find median and mean
         let median = d3.median(sample)
         let mean = d3.mean(sample)
 
-
+        // in python and all, the histograms are not really cutomizable
         let hist = d3.histogram()
             .domain(d3.extent(sample,d=>d))
             .value(d=>d)
-            .thresholds(binNumber)
+            .thresholds(binNumber)  // number of bins we want data to be divided into
+        
         let bins = hist(sample)
-        const formatter = d3.format(",.2f")
-        let data = bins.map((d, i) => {
+        
+        const formatter = d3.format(",.2f")     //keeps 2 decimal points
+        
+        
+        let data = bins.map((d, i) => {         // bind data to vis, add keys and values
             return {
                 key: `${formatter(d['x0'])}-${formatter(d['x1'])}`,
-                value: d['length']
+                value: d['length']              // keeps the length of the histogram proportional to the number of elements within the hist
             }
         })
 
@@ -71,7 +75,9 @@
             .paddingInner(0.2)
 
 
-        svg.selectAll('*').remove()
+        svg.selectAll('*').remove() // if we have multiple elements on screen which are not being used, this deletes every canvas that is no longer being used.
+        
+        
         let figure = svg.append("g")
             .attr("transform", `translate(${margin},${margin})`)
 
@@ -118,15 +124,15 @@
 
 
     }
-    BarChart(svg)
+    // BarChart(svg)
 
 
 /// control
  d3.selectAll(".rngSlider").on("input",function(d){
         BarChart(svg,
-            d3.select("#bins")._groups[0][0]['value'],
-            d3.select("#mu")._groups[0][0]['value'],
-            d3.select("#sigma")._groups[0][0]['value']
+            d3.select("#bins")._groups[0][0]['value']
+            // d3.select("#mu")._groups[0][0]['value'],
+            // d3.select("#sigma")._groups[0][0]['value']
         )
     })
 

@@ -35,12 +35,12 @@ function scatter_plot(X,Y,markersize,
         .attr("transform", `translate(${margin},${0})`)
         .call(y_axis)
     // Labels
-    axis.append("g").attr("class","label")
-        .attr("transform", `translate(${500},${1000-10})`)
-        .append("text")
-        .attr("class","label")
-        .attr("text-anchor","middle")
-        .text(xLabel)
+    // axis.append("g").attr("class","label")
+    //     .attr("transform", `translate(${500},${1000-10})`)
+    //     .append("text")
+    //     .attr("class","label")
+    //     .attr("text-anchor","middle")
+    //     .text(xLabel)
 
     axis.append("g")
         .attr("transform", `translate(${35},${500}) rotate(270)`)
