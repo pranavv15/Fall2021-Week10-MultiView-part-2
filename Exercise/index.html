@@ -37,21 +37,24 @@
 </head>
 <body>
     <h1>Multiview</h1>
-    <div class="container">
-        <div id="control" class="form-group">
-                <label for="slider1"  class="form-label">Min Flipper Length:<div id="binNumber"></div> </label>
-                <input id=slider1 type="range" min="170" max="250" value="100" step="any" class="rngSlider form-control form-range">
-                
-        </div><p>Choose the minimum value for <br>
-            Flipper Length</p>
-        </div>
     <table>
+        
         <tr>
+            <td><p id="flipper-title">Flipper Length Filter</p>
+            </div></td>
             <td><svg width="500px" height="150px"  id="top1"></svg></td>
             <td width="10%" id="button">Species: &nbsp</td>
             
         </tr>
         <tr>
+            <td><div class="container">
+                <div id="control" class="form-group">
+                        <label for="slider1"  class="form-label">Min Flipper Length:<div id="binNumber"></div> </label>
+                        <input id=slider1 type="range" min="170" max="250" value="100" step="1" class="rngSlider form-control form-range">
+                        
+                </div><p>Choose the minimum value for <br>
+                    Flipper Length</p>
+                </div></td>
             <td><svg width="500px" height="500px" viewBox="0 0 1000 1000" id="main1"></svg></td>
             <td><svg width="150px" height="500px" id="right1"></svg></td>
             

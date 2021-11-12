@@ -59,14 +59,17 @@ text.plotTitle{
 }
 .container{
     font-family: sans-serif;
-    font-size: 15pt;
+    font-size: 12pt;
     /* margin-left: auto;
-    margin-right: auto; */
-    position: fixed;
-    
+    margin-right: auto;
+         */
+    position: relative;
 }
 #slider1{
    padding: 10px;
    size: 120cm; 
    border: #d2bcbc;
+}
+#flipper-title{
+    font-family: sans-serif;
 }
