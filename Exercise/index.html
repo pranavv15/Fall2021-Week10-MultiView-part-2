@@ -14,7 +14,7 @@
             font-family: sans-serif;
         }
         .fig{
-            fill: #d2bcbc;
+            fill: white;
         }
         table{
             border: 2px solid #180202;
@@ -92,7 +92,14 @@
                     return d.species})
                 
                 let species_types = new Set(species)
-                species_types_arr = Array.from(species_types)
+                // species_types_arr = ["None"]
+                species_types_arr= Array.from(species_types)
+                species_types_arr.push("None")
+                species_types_arr.reverse()
+
+
+                let flipper_length_mm = d3.map(data,function (d){
+                            return +d.flipper_length_mm})
 
 
                 var dropdownButton = d3.select("#button")
@@ -109,9 +116,12 @@
                     .attr("value", function (d) { return d; }) 
                     .attr()
                 
-                    function plot(spe){
+                    // A function to filter data and then plot
+                    function plot(spe,v){
                        
-                        data1 = data.filter(d=> d.species===spe)
+                        data2 = data.filter(d=> d.species===spe)    // Filter species type for dropdown
+                        data1 = data2.filter(d=> d.flipper_length_mm>=v)    //Filter flipper length for slider
+
                         let culmen_length_mm = d3.map(data1,function (d){
                             return +d.culmen_length_mm})
                         let culmen_depth_mm = d3.map(data1,function (d){
@@ -134,46 +144,35 @@
                                 return 2
                             }
                         })
-
-                        function filtermin(min){
-                        flip = flipper_length_mm.filter(d=> d>=min)
-                            return flip;
-                            }
+                        
                         let island_codes = new Set(island_code)
                         island_codes_arr = Array.from(island_codes)
+                         
 
                         scatter_plot(culmen_length_mm,
-                            culmen_depth_mm,
-                            flipper_length_mm,
-                            island_code,
-                            "main1",
-                            title="Species : " + spe,
-                            xLabel="culmen_length_mm",
-                            yLabel="culmen_depth_mm",
-                            legend = island_types_arr,
-                            legendColor = island_codes_arr)    
-                            //#############
-                        bar_plot(culmen_length_mm, 10,"top1")
-                        h_bar_plot(culmen_depth_mm,10,"right1")
-                       
-                        d3.selectAll(".rngSlider").on("input",function(d){
-                            let v1 = filtermin(d.target.valueAsNumber)  
-
-                            scatter_plot(culmen_length_mm,
                                 culmen_depth_mm,
-                                v1,
+                                flipper_length_mm,
                                 island_code,
                                 "main1",
                                 title="Species : " + spe,
                                 xLabel="culmen_length_mm",
                                 yLabel="culmen_depth_mm",
                                 legend = island_types_arr,
-                                legendColor = island_codes_arr)})
+                                legendColor = island_codes_arr)
+                        bar_plot(culmen_length_mm, 10,"top1")
+                        h_bar_plot(culmen_depth_mm,10,"right1")
                             }
-                    plot("Adelie")
+                            
+                    plot("None", 0) // A default plot with no data points. Option to choose species is provided in dropdown menu
+                    // Drop down menu to choose species type
                     dropdownButton.on("change",function(d){
                             let selectedvar = d3.select(this).property("value")
-                            plot(selectedvar)
+                            plot(selectedvar,0)
+                            d3.selectAll(".rngSlider").on("input",function(k){ //  a slider to choose the minimum flipper length for the data to be plotted
+                            let v1 = k.target.valueAsNumber
+                            console.log(v1)
+                            plot(selectedvar,v1)
+                        })
                     })
                 }
 </script>

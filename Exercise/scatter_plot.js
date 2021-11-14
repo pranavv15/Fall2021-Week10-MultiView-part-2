@@ -22,7 +22,7 @@ return [data[0]-pad*data[0], data[1]+pad*data[1] ]
 let xScale= d3.scaleLinear().domain(data_axis_pad(d3.extent(X))).range([0+margin,1000-margin])
 let yScale= d3.scaleLinear().domain(data_axis_pad(d3.extent(Y))).range([1000-margin,0 + margin])
 let rScale= d3.scaleLinear().domain(d3.extent(markersize)).range([5,15])
-let colorScale= d3.scaleLinear().domain(d3.extent(ColorData)).range(['steelblue','pink'])
+let colorScale= d3.scaleLinear().domain(d3.extent(ColorData)).range(['red','green'])
 
 axis.selectAll('.markers')
 .data(X)
@@ -46,12 +46,11 @@ return `translate(${xScale(X[i])}, ${yScale(Y[i])})`})
   // // console.log(this)
 
 })
-
-
 .on("mouseout",function(){
   d3.select(this)
   .attr("stroke",null)
   .attr("r",function(d,i) { return rScale(markersize[i])})
+  .attr("opacity",1)
 })
 
 
