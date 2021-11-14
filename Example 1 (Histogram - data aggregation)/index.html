@@ -130,9 +130,9 @@
 /// control
  d3.selectAll(".rngSlider").on("input",function(d){
         BarChart(svg,
-            d3.select("#bins")._groups[0][0]['value']
-            // d3.select("#mu")._groups[0][0]['value'],
-            // d3.select("#sigma")._groups[0][0]['value']
+            d3.select("#bins")._groups[0][0]['value'],
+            d3.select("#mu")._groups[0][0]['value'],
+            d3.select("#sigma")._groups[0][0]['value']
         )
     })
 

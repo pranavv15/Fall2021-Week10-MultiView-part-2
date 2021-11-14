@@ -32,6 +32,12 @@
         .form-container{
             text-align: center;
         }
+        #rangeValue{
+            font-family: sans-serif;
+            /* background-color: aqua; */
+            text-align: center;
+            font-size: 15pt;
+        }
     </style>
     <script src="../lib/d3.js"></script>
 </head>
@@ -50,10 +56,10 @@
             <td><div class="container">
                 <div id="control" class="form-group">
                         <label for="slider1"  class="form-label">Min Flipper Length:<div id="binNumber"></div> </label>
-                        <input id=slider1 type="range" min="170" max="250" value="100" step="1" class="rngSlider form-control form-range">
+                        <input id=slider1 type="range" min="170" max="250" value="100" step="1" class="rngSlider form-control form-range" oninput="rangeValue.innerText = this.value">
+                        <p id="rangeValue">10</p>
                         
-                </div><p>Choose the minimum value for <br>
-                    Flipper Length</p>
+                </div>
                 </div></td>
             <td><svg width="500px" height="500px" viewBox="0 0 1000 1000" id="main1"></svg></td>
             <td><svg width="150px" height="500px" id="right1"></svg></td>
@@ -172,7 +178,8 @@
                             let v1 = k.target.valueAsNumber
                             console.log(v1)
                             plot(selectedvar,v1)
-                        })
+                        }).attr("text",k.target.valueAsNumber)
+                        
                     })
                 }
 </script>
